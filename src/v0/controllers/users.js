@@ -35,4 +35,4 @@ function login(req, res){
 }
 
 
-exports.defailt = {login}
+module.exports = {login}
