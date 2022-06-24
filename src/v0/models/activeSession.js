@@ -1,18 +1,18 @@
-const { Sequelize, DataTypes, Model } = require('sequelize')
-const sequelize = new Sequelize('')
+const mongoose = require("mongoose")
 
-export const activeSession = sequelize.define('ActiveSession', {
+const ActiveSession = mongoose.Schema({
     token: {
-        type: DataTypes.STRING,
+        type: String,
         required: true,
     },
     userId: {
-        type: DataTypes.STRING,
+        type: String,
         required: true,
     },
     date: {
-        type: DataTypes.DATE,
+        type: Date,
         default: Date.now,
     },
 })
 
+module.exports = ActiveSession

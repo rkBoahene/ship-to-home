@@ -4,6 +4,16 @@ const { config } = require('../../config/config')
 const User = require('../models/user')
 const ActiveSession = require('../models/activeSession')
 
+
+function home(req, res){
+    return res.send('home page')
+}
+
+function register(req,res){
+    const {name,email, password} = req.body
+    User.find
+}
+
 function login(req, res){
     const email = req.body.email
     const password = req.body.password
@@ -34,5 +44,16 @@ function login(req, res){
     })
 }
 
+function logout(req, res){
+    const token = req.body.token
+    ActiveSession.destroy({
+        where:{
+            token:token
+        }
+    },function(err,item){
+        if(err) res.status(500).json({succes: false,msg:'could not log out'})
+        res.status(200).json({succes:true,msg:'logged out'})
+    })
+}
 
-module.exports = {login}
+module.exports = {login, logout, register, home}

@@ -1,30 +1,32 @@
-const { Sequelize, DataTypes, Model } = require('sequelize')
-const sequelize = new Sequelize('')
+const mongoose = require("mongoose")
 
-export const user = sequelize.define('User', {
+const User = mongoose.Schema({
     name: {
-        type: DataTypes.STRING,
-        required: true,
+        type: String,
+        required: [true,'name is required'],
     },
     email: {
-        type: DataTypes.STRING,
-        required: true,
+        type: String,
+        required: [true,'email is required'],
     },
     password: {
-        type: DataTypes.STRING,
-        required: true,
+        type: String,
+        required: [true,'password cannot be empty'],
+        minlength: [6, "password must me more than 6 characters"]
+        
     },
     accountConfirmation: {
-        type: DataTypes.BOOLEAN,
+        type: Boolean,
         default: false,
     },
     resetPass: {
-        type: DataTypes.BOOLEAN,
+        type: Boolean,
         default: false,
     },
     date: {
-        type: DataTypes.DATE,
+        type: Date,
         default: Date.now,
     },
 })
 
+module.exports = mongoose.model("User",User)
