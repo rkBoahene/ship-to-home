@@ -1,14 +1,7 @@
-const Sequelize = require('sequelize')
-const config = require('./config/config')
+const mongoose = require("mongoose")
 
-const conf = config.dev
+const dbConnect = (url) => {
+    return mongoose.connect(url)
+}
 
-export const sequelize = new Sequelize({
-    "username": conf.username,
-    "password": conf.password,
-    "database": conf.database,
-    "host": conf.host,
-
-    dialect: 'postgres',
-    storage: ':memory:',
-})
+module.exports = dbConnect
